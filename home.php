@@ -9,8 +9,14 @@ createHeader("Beranda");
 <body>
     <?php
     createNavbar();
-    createSidebar();
-    ?>
+
+    $body = function () { ?>
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <h2 class="mb-4">Empty</h2>
+        <?php };
+
+    createSidebar(null); ?>
 </body>
 
 <?php
