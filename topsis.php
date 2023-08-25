@@ -14,6 +14,7 @@ createHeader("Topsis");
         include("db.php");
         $global_crips_distribution = [];
         $global_nilai_terbobot = [];
+        $global_calculation_parameters = [];
     ?>
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
@@ -251,16 +252,28 @@ createHeader("Topsis");
                         // $c4 = $c4->fetch_array();
 
                         $c5 = $conn->query($get_crips . $value["c5"]);
-                        $c5 = $c5->fetch_array(); ?>
+                        $c5 = $c5->fetch_array();
+
+                        $parameter = [
+                            "c1" => ($global_crips_distribution["c1"] == 0 ? 0 : ($global_nilai_terbobot["c1"] * ($c1["bobot"] / $global_crips_distribution["c1"]))),
+                            "c2" => ($global_crips_distribution["c2"] == 0 ? 0 : ($global_nilai_terbobot["c2"] * ($value["c2"] / $global_crips_distribution["c2"]))),
+                            "c3" => ($global_crips_distribution["c3"] == 0 ? 0 : ($global_nilai_terbobot["c3"] * ($c3["bobot"] / $global_crips_distribution["c3"]))),
+                            "c4" => ($global_crips_distribution["c4"] == 0 ? 0 : ($global_nilai_terbobot["c4"] * ($value["c4"] / $global_crips_distribution["c4"]))),
+                            "c5" => ($global_crips_distribution["c5"] == 0 ? 0 : ($global_nilai_terbobot["c5"] * ($c5["bobot"] / $global_crips_distribution["c5"]))),
+                        ];
+
+                        array_push($global_calculation_parameters, $parameter);
+
+                    ?>
                         <tr>
                             <td><?= ($i + 1) ?></td>
                             <td><?= $value["nama_pemilik"] ?></td>
                             <td><?= $value["alamat"] ?></td>
-                            <td><?= ($global_crips_distribution["c1"] == 0 ? 0 : ($global_nilai_terbobot["c1"] * ($c1["bobot"] / $global_crips_distribution["c1"]))) ?></td>
-                            <td><?= ($global_crips_distribution["c2"] == 0 ? 0 : ($global_nilai_terbobot["c2"] * ($value["c2"] / $global_crips_distribution["c2"]))) ?></td>
-                            <td><?= ($global_crips_distribution["c3"] == 0 ? 0 : ($global_nilai_terbobot["c3"] * ($c3["bobot"] / $global_crips_distribution["c3"]))) ?></td>
-                            <td><?= ($global_crips_distribution["c4"] == 0 ? 0 : ($global_nilai_terbobot["c4"] * ($value["c4"] / $global_crips_distribution["c4"]))) ?></td>
-                            <td><?= ($global_crips_distribution["c5"] == 0 ? 0 : ($global_nilai_terbobot["c5"] * ($c5["bobot"] / $global_crips_distribution["c5"]))) ?></td>
+                            <td><?= $parameter["c1"] ?></td>
+                            <td><?= $parameter["c2"] ?></td>
+                            <td><?= $parameter["c3"] ?></td>
+                            <td><?= $parameter["c4"] ?></td>
+                            <td><?= $parameter["c5"] ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -289,6 +302,57 @@ createHeader("Topsis");
                 <tbody>
                     <tr>
                         <?php foreach ($benefit_cost as $v) { ?>
+                            <td><?= $v ?></td>
+                        <?php } ?>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- end solusi ideal positif dan negatif -->
+
+
+            <!-- start solusi ideal positif -->
+            <h3 class="mb-4 text-center text-capitalize">solusi ideal positif A+ </h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <?php
+                    $list_nilai_terbobot = $conn->query("SELECT tipe, nilai FROM nilai_terbobot ORDER BY id_nilai_terbobot ASC");
+                    foreach ($list_nilai_terbobot as $v) { ?>
+                        <th><?= $v["tipe"] ?></th>
+                    <?php }
+
+                    $benefit_cost = [
+                        "c1" => "benefit",
+                        "c2" => "cost",
+                        "c3" => "benefit",
+                        "c4" => "benefit",
+                        "c5" => "benefit",
+                    ];
+
+                    $result_max_min = [];
+                    foreach ($benefit_cost as $c => $v) {
+                        if ($v == "benefit") {
+                            $max = 0.0;
+                            foreach ($global_calculation_parameters as $gcp) {
+                                if ($gcp[$c] > $max) {
+                                    $max = $gcp[$c];
+                                }
+                            }
+                            $result_max_min[$c] = $max;
+                        } else if ($v == "cost") {
+                            $min = PHP_FLOAT_MAX;
+                            foreach ($global_calculation_parameters as $gcp) {
+                                if ($gcp[$c] < $min) {
+                                    $min = $gcp[$c];
+                                }
+                            }
+                            $result_max_min[$c] = $min;
+                        }
+                    }
+                    ?>
+                </thead>
+                <tbody>
+                    <tr>
+                        <?php foreach ($result_max_min as $v) { ?>
                             <td><?= $v ?></td>
                         <?php } ?>
                     </tr>
