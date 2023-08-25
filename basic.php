@@ -53,7 +53,7 @@ function createSidebar($body = null)
                     <a href="#"><span class="fa fa-home mr-3"></span> Beranda</a>
                 </li>
                 <li>
-                    <a href="#" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
+                    <a href="alternatif.php" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
                 </li>
                 <!-- TODO: added specific icon -->
                 <li>
@@ -75,17 +75,7 @@ function createSidebar($body = null)
         <!-- Page Content  -->
         <?php if ($body == null) { ?>
             <div id="content" class="p-4 p-md-5 pt-5">
-                <h2 class="mb-4">Sidebar #04</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                    laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                    laborum.</p>
+                <h2 class="mb-4">Empty</h2>
             </div>
         <?php } else if ($body != null) {
             $body();
