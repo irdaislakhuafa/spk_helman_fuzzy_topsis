@@ -15,6 +15,9 @@ createHeader("Topsis");
         $global_crips_distribution = [];
         $global_nilai_terbobot = [];
         $global_calculation_parameters = [];
+        $global_negatif_solution_A_min = [];
+        $global_negatif_solution_A_max = [];
+        $global_negatif_solution_D_min_max = [];
     ?>
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
@@ -348,6 +351,9 @@ createHeader("Topsis");
                             $result_max_min[$c] = $min;
                         }
                     }
+
+                    // set to $global_negatif_solution_A_max
+                    $global_negatif_solution_A_max = $result_max_min;
                     ?>
                 </thead>
                 <tbody>
@@ -398,6 +404,9 @@ createHeader("Topsis");
                             $result_max_min[$c] = $max;
                         }
                     }
+
+                    // set to $global_negatif_solution_A_min
+                    $global_negatif_solution_A_min = $result_max_min;
                     ?>
                 </thead>
                 <tbody>
@@ -406,6 +415,56 @@ createHeader("Topsis");
                             <td><?= $v ?></td>
                         <?php } ?>
                     </tr>
+                </tbody>
+            </table>
+            <!-- end solusi ideal negatif -->
+
+            <!-- start solusi ideal negatif -->
+            <h3 class="mb-4 text-center text-capitalize">solusi ideal negatif D(-/+) </h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <tr>
+                        <th>nama pemilik</th>
+                        <th>alamat</th>
+                        <th>d+</th>
+                        <th>d-</th>
+                    </tr>
+                    <?php
+                    $solution_D_min_max = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a");
+
+                    $result = [];
+                    foreach ($solution_D_min_max as $i => $s) {
+                        // set D+
+                        $temp_d["d+"] = 0.0;
+                        foreach ($global_negatif_solution_A_max as $c => $v) {
+                            $temp_d["d+"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
+                        }
+
+                        // set D+
+                        $temp_d["d-"] = 0.0;
+                        foreach ($global_negatif_solution_A_min as $c => $v) {
+                            $temp_d["d-"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
+                        }
+
+                        array_push($result, [
+                            "nama_pemilik" => $s["nama_pemilik"],
+                            "alamat" => $s["alamat"],
+                            "d+" => $temp_d["d+"],
+                            "d-" => $temp_d["d-"],
+                        ]);
+                    } ?>
+                </thead>
+                <tbody>
+                    <?php
+                    // var_dump($solution_D_min_max);
+                    foreach ($result as $i => $v) { ?>
+                        <tr>
+                            <td><?= $v["nama_pemilik"] ?></td>
+                            <td><?= $v["alamat"] ?></td>
+                            <td><?= $v["d+"] ?></td>
+                            <td><?= $v["d-"] ?></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
             <!-- end solusi ideal negatif -->
