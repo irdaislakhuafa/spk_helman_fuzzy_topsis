@@ -28,7 +28,15 @@ createHeader("Alternatif");
                     </div>
                 <?php } else if ($_GET["status"] == "!tambah") { ?>
                     <div id="alert" class="alert alert-success" role="alert">
-                        Berhasil Menambah Data!
+                        Gagal Menambah Data!
+                    </div>
+                <?php } else if ($_GET["status"] == "hapus") { ?>
+                    <div id="alert" class="alert alert-success" role="alert">
+                        Berhasil Menghapus Data!
+                    </div>
+                <?php } else if ($_GET["status"] == "!hapus") { ?>
+                    <div id="alert" class="alert alert-success" role="alert">
+                        Gagal Menghapus Data!
                     </div>
             <?php }
             }
@@ -82,7 +90,7 @@ createHeader("Alternatif");
                             <td><?= $c5["nama"] ?></td>
                             <td>
                                 <button type="button" class="btn btn-outline-success">Edit</button>
-                                <button type="button" class="btn btn-danger">Hapus</button>
+                                <a href="./hapus_alternatif.php?id=<?= $value["id_alternatif"] ?>" class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
                     <?php }
