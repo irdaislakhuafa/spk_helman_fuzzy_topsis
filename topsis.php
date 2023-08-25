@@ -319,7 +319,7 @@ createHeader("Topsis");
             <!-- end solusi ideal positif dan negatif -->
 
 
-            <!-- start solusi ideal positif -->
+            <!-- start solusi ideal positif A+ -->
             <h3 class="mb-4 text-center text-capitalize">solusi ideal positif A+ </h3>
             <table class="table table-hover shadow">
                 <thead class="text-capitalize">
@@ -370,9 +370,9 @@ createHeader("Topsis");
                     </tr>
                 </tbody>
             </table>
-            <!-- end solusi ideal positif dan negatif -->
+            <!-- end solusi ideal positif dan negatif A+ -->
 
-            <!-- start solusi ideal negatif -->
+            <!-- start solusi ideal negatif A- -->
             <h3 class="mb-4 text-center text-capitalize">solusi ideal negatif A- </h3>
             <table class="table table-hover shadow">
                 <thead class="text-capitalize">
@@ -423,10 +423,10 @@ createHeader("Topsis");
                     </tr>
                 </tbody>
             </table>
-            <!-- end solusi ideal negatif -->
+            <!-- end solusi ideal negatif A- -->
 
-            <!-- start solusi ideal negatif -->
-            <h3 class="mb-4 text-center text-capitalize">solusi ideal negatif D(-/+) </h3>
+            <!-- start solusi ideal negatif D (-/+) -->
+            <h3 class="mb-4 text-center text-capitalize">solusi ideal negatif D (-/+) </h3>
             <table class="table table-hover shadow">
                 <thead class="text-capitalize">
                     <tr>
@@ -455,11 +455,13 @@ createHeader("Topsis");
                         $temp_d["d-"] = sqrt($temp_d["d-"]);
 
                         array_push($result, [
+                            "id_alternatif" => $s["id_alternatif"],
                             "nama_pemilik" => $s["nama_pemilik"],
                             "alamat" => $s["alamat"],
                             "d+" => $temp_d["d+"],
                             "d-" => $temp_d["d-"],
                         ]);
+                        $global_negatif_solution_D_min_max = $result;
                     } ?>
                 </thead>
                 <tbody>
@@ -475,7 +477,51 @@ createHeader("Topsis");
                     <?php } ?>
                 </tbody>
             </table>
-            <!-- end solusi ideal negatif -->
+            <!-- end nilai prefrensi -->
+
+            <!-- start nilai prefrensi -->
+            <h3 class="mb-4 text-center text-capitalize">nilai prefrensi </h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <tr>
+                        <th>nama pemilik</th>
+                        <th>alamat</th>
+                        <th>prefrensi</th>
+                    </tr>
+                    <?php
+                    $results = [];
+                    foreach ($global_negatif_solution_D_min_max as $i => $v) {
+                        $result = [
+                            "nama_pemilik" => $v["nama_pemilik"],
+                            "alamat" => $v["alamat"],
+                            "prefrensi" => floatval($v["d-"] / ($v["d-"] + $v["d+"]))
+                        ];
+                        array_push($results, $result);
+
+                        // update alternatif prefrensi
+                        $prefrensi = $result["prefrensi"];
+                        $id = $v["id_alternatif"];
+                        $conn->query("UPDATE alternatif SET prefrensi = $prefrensi WHERE id_alternatif = $id");
+                    }
+
+                    usort($results, function ($a, $b) {
+                        return $b["prefrensi"] <=> $a["prefrensi"];
+                    });
+                    ?>
+                </thead>
+                <tbody>
+                    <?php
+                    // var_dump($solution_D_min_max);
+                    foreach ($results as $i => $v) { ?>
+                        <tr>
+                            <td><?= $v["nama_pemilik"] ?></td>
+                            <td><?= $v["alamat"] ?></td>
+                            <td><?= $v["prefrensi"] ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <!-- end nilai prefrensi -->
         <?php };
 
     createSidebar($body); ?>

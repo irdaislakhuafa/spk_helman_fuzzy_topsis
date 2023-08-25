@@ -9,6 +9,7 @@ CREATE TABLE `alternatif` (
     id_alternatif int primary key auto_increment not null,
     nama_pemilik varchar(255), 
     alamat text,
+    prefrensi double,
     c1 int, -- id_crips 
     c2 double, 
     c2_real int, 
