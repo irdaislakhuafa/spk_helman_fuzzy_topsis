@@ -60,7 +60,7 @@ function createSidebar($body = null)
                     <a href="#"><span class="fa fa-paper-plane mr-3"></span> Kriteria</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Fuzzy</a>
+                    <a href="./fuzzy.php"><span class="fa fa-paper-plane mr-3"></span> Fuzzy</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-paper-plane mr-3"></span> Topsis</a>
