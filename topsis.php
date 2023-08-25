@@ -359,6 +359,56 @@ createHeader("Topsis");
                 </tbody>
             </table>
             <!-- end solusi ideal positif dan negatif -->
+
+            <!-- start solusi ideal negatif -->
+            <h3 class="mb-4 text-center text-capitalize">solusi ideal negatif A- </h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <?php
+                    $list_nilai_terbobot = $conn->query("SELECT tipe, nilai FROM nilai_terbobot ORDER BY id_nilai_terbobot ASC");
+                    foreach ($list_nilai_terbobot as $v) { ?>
+                        <th><?= $v["tipe"] ?></th>
+                    <?php }
+
+                    $benefit_cost = [
+                        "c1" => "benefit",
+                        "c2" => "cost",
+                        "c3" => "benefit",
+                        "c4" => "benefit",
+                        "c5" => "benefit",
+                    ];
+
+                    $result_max_min = [];
+                    foreach ($benefit_cost as $c => $v) {
+                        if ($v == "benefit") {
+                            $min = PHP_FLOAT_MAX;
+                            foreach ($global_calculation_parameters as $gcp) {
+                                if ($gcp[$c] < $min) {
+                                    $min = $gcp[$c];
+                                }
+                            }
+                            $result_max_min[$c] = $min;
+                        } else if ($v == "cost") {
+                            $max = 0.0;
+                            foreach ($global_calculation_parameters as $gcp) {
+                                if ($gcp[$c] > $max) {
+                                    $max = $gcp[$c];
+                                }
+                            }
+                            $result_max_min[$c] = $max;
+                        }
+                    }
+                    ?>
+                </thead>
+                <tbody>
+                    <tr>
+                        <?php foreach ($result_max_min as $v) { ?>
+                            <td><?= $v ?></td>
+                        <?php } ?>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- end solusi ideal negatif -->
         <?php };
 
     createSidebar($body); ?>
