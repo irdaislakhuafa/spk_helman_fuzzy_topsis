@@ -38,6 +38,14 @@ createHeader("Alternatif");
                     <div id="alert" class="alert alert-success" role="alert">
                         Gagal Menghapus Data!
                     </div>
+                <?php } else if ($_GET["status"] == "edit") { ?>
+                    <div id="alert" class="alert alert-success" role="alert">
+                        Berhasil Mengedit Data!
+                    </div>
+                <?php } else if ($_GET["status"] == "!edit") { ?>
+                    <div id="alert" class="alert alert-success" role="alert">
+                        Gagal Mengedit Data!
+                    </div>
             <?php }
             }
             ?>
@@ -89,7 +97,8 @@ createHeader("Alternatif");
                             <td><?= $c4["nama"] ?></td>
                             <td><?= $c5["nama"] ?></td>
                             <td>
-                                <button type="button" class="btn btn-outline-success">Edit</button>
+                                <!-- TODO: added functionality to edit alternatif -->
+                                <a href="./edit_alternatif.php?id=<?= $value["id_alternatif"] ?>" type="button" class="btn btn-outline-success">Edit</a>
                                 <a href="./hapus_alternatif.php?id=<?= $value["id_alternatif"] ?>" class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
