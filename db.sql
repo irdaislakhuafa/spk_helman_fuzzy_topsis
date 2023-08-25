@@ -9,6 +9,7 @@ CREATE TABLE `alternatif` (
     id_alternatif int primary key auto_increment not null,
     nama_pemilik varchar(255), 
     alamat text,
+    prefrensi double,
     c1 int, -- id_crips 
     c2 double, 
     c2_real int, 
@@ -45,7 +46,21 @@ CREATE TABLE `perhitungan` (
     nilai_perhitungan double
 );
 
+CREATE TABLE `nilai_terbobot` (
+    id_nilai_terbobot int primary key auto_increment not null,
+    tipe varchar(255),
+    nilai double
+);
+
 -- sample data
+-- TODO: added page to add and edit nilai_terbobot
+INSERT INTO `nilai_terbobot` (tipe, nilai) VALUES
+    ("c1", 1.0),
+    ("c2", 0.2),
+    ("c3", 1.0),
+    ("c4", 0.7),
+    ("c5", 1.0);
+
 -- kriteria 
 INSERT INTO `kriteria` (nama_kriteria, tipe) VALUES
     ("Jenis Tanah", "c1"),

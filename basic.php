@@ -31,7 +31,7 @@ function createFooter()
 
 function createNavbar()
 { ?>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container d-flex  text-center ">
             <h1 class="text-white" style="font-size: 220%;">Sistem Pendukung Keputusan Pemilihan Lahan Tanaman Jagung</h1>
         </div>
@@ -63,7 +63,7 @@ function createSidebar($body = null)
                     <a href="./fuzzy.php"><span class="fa fa-paper-plane mr-3"></span> Fuzzy</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Topsis</a>
+                    <a href="./topsis.php"><span class="fa fa-paper-plane mr-3"></span> Topsis</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-paper-plane mr-3"></span> Hasil</a>
