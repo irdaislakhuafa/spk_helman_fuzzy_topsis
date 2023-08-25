@@ -56,9 +56,9 @@ function createSidebar($body = null)
                     <a href="alternatif.php" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
                 </li>
                 <!-- TODO: added specific icon -->
-                <li>
+                <!-- <li>
                     <a href="#"><span class="fa fa-paper-plane mr-3"></span> Kriteria</a>
-                </li>
+                </li> -->
                 <li>
                     <a href="./fuzzy.php"><span class="fa fa-paper-plane mr-3"></span> Fuzzy</a>
                 </li>
