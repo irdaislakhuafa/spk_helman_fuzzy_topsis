@@ -266,6 +266,35 @@ createHeader("Topsis");
                 </tbody>
             </table>
             <!-- end bahan perhitungan -->
+
+            <!-- start solusi ideal positif dan negatif -->
+            <h3 class="mb-4 text-center text-capitalize">solusi ideal positif dan negatif</h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <?php
+                    $list_nilai_terbobot = $conn->query("SELECT tipe, nilai FROM nilai_terbobot ORDER BY id_nilai_terbobot ASC");
+                    foreach ($list_nilai_terbobot as $v) { ?>
+                        <th><?= $v["tipe"] ?></th>
+                    <?php }
+
+                    $benefit_cost = [
+                        "c1" => "benefit",
+                        "c2" => "cost",
+                        "c3" => "benefit",
+                        "c4" => "benefit",
+                        "c5" => "benefit",
+                    ];
+                    ?>
+                </thead>
+                <tbody>
+                    <tr>
+                        <?php foreach ($benefit_cost as $v) { ?>
+                            <td><?= $v ?></td>
+                        <?php } ?>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- end solusi ideal positif dan negatif -->
         <?php };
 
     createSidebar($body); ?>
