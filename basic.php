@@ -63,7 +63,7 @@ function createSidebar($body = null)
                     <a href="./fuzzy.php"><span class="fa fa-paper-plane mr-3"></span> Fuzzy</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Topsis</a>
+                    <a href="./topsis.php"><span class="fa fa-paper-plane mr-3"></span> Topsis</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-paper-plane mr-3"></span> Hasil</a>
