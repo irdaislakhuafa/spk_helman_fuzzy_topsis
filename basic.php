@@ -7,7 +7,6 @@ function createHeader($title)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
         <!-- for sidebar -->
 
@@ -15,6 +14,7 @@ function createHeader($title)
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/sidebar/css/style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
     </head>
 <?php }
 
@@ -38,7 +38,7 @@ function createNavbar()
     </nav>
 <?php }
 
-function createSidebar()
+function createSidebar($body = null)
 { ?>
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
@@ -53,7 +53,7 @@ function createSidebar()
                     <a href="#"><span class="fa fa-home mr-3"></span> Beranda</a>
                 </li>
                 <li>
-                    <a href="#" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
+                    <a href="alternatif.php" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
                 </li>
                 <!-- TODO: added specific icon -->
                 <li>
@@ -73,19 +73,14 @@ function createSidebar()
         </nav>
 
         <!-- Page Content  -->
-        <div id="content" class="p-4 p-md-5 pt-5">
-            <h2 class="mb-4">Sidebar #04</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.</p>
-        </div>
+        <?php if ($body == null) { ?>
+            <div id="content" class="p-4 p-md-5 pt-5">
+                <h2 class="mb-4">Empty</h2>
+            </div>
+        <?php } else if ($body != null) {
+            $body();
+        } ?>
+
     </div>
 
 <?php }
