@@ -191,6 +191,28 @@ createHeader("Topsis");
                 </tbody>
             </table>
             <!-- end matriks ternormalisasi -->
+
+            <!-- start nilai terbobot -->
+            <h3 class="mb-4 text-center text-capitalize">nilai terbobot</h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <?php
+                    $list_nilai_terbobot = $conn->query("SELECT tipe, nilai FROM nilai_terbobot ORDER BY id_nilai_terbobot ASC");
+                    foreach ($list_nilai_terbobot as $v) { ?>
+                        <th><?= $v["tipe"] ?></th>
+                    <?php }
+                    ?>
+                </thead>
+                <tbody>
+                    <tr>
+                        <?php foreach ($list_nilai_terbobot as $v) { ?>
+                            <td><?= $v["nilai"] ?></td>
+                        <?php } ?>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- end nilai terbobot -->
+
         <?php };
 
     createSidebar($body); ?>
