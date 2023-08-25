@@ -16,9 +16,24 @@ createHeader("Alternatif");
             <div class="row">
                 <h2 class="mb-4 text-capitalize">lahan alternatif</h2>
                 <div class=" ml-auto d-flex mb-3 pt-1 pb-1" style="margin-right: 10%;">
-                    <button type="button" class="btn btn-warning">Tambah</button>
+                    <a href="tambah_alternatif.php" class="btn btn-warning">Tambah</a>
                 </div>
             </div>
+
+            <?php
+            if (isset($_GET["status"])) {
+                if ($_GET["status"] == "tambah") { ?>
+                    <div id="alert" class="alert alert-success" role="alert">
+                        Berhasil Menambah Data!
+                    </div>
+                <?php } else if ($_GET["status"] == "!tambah") { ?>
+                    <div id="alert" class="alert alert-success" role="alert">
+                        Berhasil Menambah Data!
+                    </div>
+            <?php }
+            }
+            ?>
+
             <!-- start table -->
             <table class="table table-hover">
                 <thead class="text-capitalize">
@@ -78,6 +93,11 @@ createHeader("Alternatif");
         <?php };
 
     createSidebar($body); ?>
+        <script>
+            setTimeout(() => {
+                document.getElementById("alert").remove()
+            }, 1000 * 3)
+        </script>
 </body>
 
 <?php

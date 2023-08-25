@@ -7,7 +7,6 @@ function createHeader($title)
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="assets/css/bootstrap.css">
 
         <!-- for sidebar -->
 
@@ -15,6 +14,7 @@ function createHeader($title)
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/sidebar/css/style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
     </head>
 <?php }
 
