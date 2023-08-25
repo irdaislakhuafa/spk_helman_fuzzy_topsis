@@ -99,12 +99,15 @@ createHeader("Topsis");
                         $c1_temp = $conn->query($get_crips . $v["c1"])->fetch_assoc();
                         $c1 += pow(floatval($c1_temp["bobot"]), 2);
                     }
+                    $c1 = sqrt($c1);
 
                     // C2
                     $c2 = 0.0;
                     foreach ($list_alternatif as $i => $v) {
                         $c2 += pow(floatval($v["c2"]), 2);
                     }
+                    $c2 = sqrt($c2);
+
 
                     // C3
                     $c3 = 0.0;
@@ -112,12 +115,14 @@ createHeader("Topsis");
                         $c3_temp = $conn->query($get_crips . $v["c3"])->fetch_assoc();
                         $c3 += pow(floatval($c3_temp["bobot"]), 2);
                     }
+                    $c3 = sqrt($c3);
 
                     // C4
                     $c4 = 0.0;
                     foreach ($list_alternatif as $i => $v) {
                         $c4 += pow(floatval($v["c4"]), 2);
                     }
+                    $c4 = sqrt($c4);
 
                     // C5
                     $c5 = 0.0;
@@ -125,6 +130,7 @@ createHeader("Topsis");
                         $c5_temp = $conn->query($get_crips . $v["c5"])->fetch_assoc();
                         $c5 += pow(floatval($c5_temp["bobot"]), 2);
                     }
+                    $c5 = sqrt($c5);
 
                     // set all crips to global variable
                     $global_crips_distribution = [
@@ -439,12 +445,14 @@ createHeader("Topsis");
                         foreach ($global_negatif_solution_A_max as $c => $v) {
                             $temp_d["d+"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
                         }
+                        $temp_d["d+"] = sqrt($temp_d["d+"]);
 
                         // set D+
                         $temp_d["d-"] = 0.0;
                         foreach ($global_negatif_solution_A_min as $c => $v) {
                             $temp_d["d-"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
                         }
+                        $temp_d["d-"] = sqrt($temp_d["d-"]);
 
                         array_push($result, [
                             "nama_pemilik" => $s["nama_pemilik"],
