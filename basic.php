@@ -32,21 +32,8 @@ function createFooter()
 function createNavbar()
 { ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="container d-flex  text-center ">
+            <h1 class="text-white" style="font-size: 220%;">Sistem Pendukung Keputusan Pemilihan Lahan Tanaman Jagung</h1>
         </div>
     </nav>
 <?php }
@@ -66,13 +53,20 @@ function createSidebar()
                     <a href="#"><span class="fa fa-home mr-3"></span> Beranda</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
+                    <a href="#" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
+                </li>
+                <!-- TODO: added specific icon -->
+                <li>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Kriteria</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Settings</a>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Fuzzy</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Information</a>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Topsis</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Hasil</a>
                 </li>
             </ul>
 
