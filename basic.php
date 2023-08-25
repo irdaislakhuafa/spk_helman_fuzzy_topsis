@@ -31,7 +31,7 @@ function createFooter()
 
 function createNavbar()
 { ?>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container d-flex  text-center ">
             <h1 class="text-white" style="font-size: 220%;">Sistem Pendukung Keputusan Pemilihan Lahan Tanaman Jagung</h1>
         </div>
