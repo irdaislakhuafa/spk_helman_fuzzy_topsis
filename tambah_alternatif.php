@@ -55,7 +55,14 @@ createHeader("Tambah Alternatif");
                                 </div>
                             </div>
 
-                            <!-- TODO: added input suhu -->
+                            <!-- suhu -->
+                            <div class="mb-3 row">
+                                <label for="suhu" class="col-sm-2 col-form-label text-capitalize">suhu ℃</label>
+                                <div class="col-sm-10">
+                                    <input name="suhu" type="number" class="form-control" id="suhu" required> </input>
+                                </div>
+                            </div>
+
 
                             <!-- ketersediaan air -->
                             <div class="mb-3 row">
@@ -75,7 +82,13 @@ createHeader("Tambah Alternatif");
                                 </div>
                             </div>
 
-                            <!-- TODO: added input PH tanah -->
+                            <!-- ph_tanah -->
+                            <div class="mb-3 row">
+                                <label for="ph_tanah" class="col-sm-2 col-form-label text-capitalize">PH Tanah</label>
+                                <div class="col-sm-10">
+                                    <input name="ph_tanah" type="text" class="form-control" id="ph_tanah" required> </input>
+                                </div>
+                            </div>
 
                             <!-- lapisan olahan -->
                             <div class="mb-3 row">

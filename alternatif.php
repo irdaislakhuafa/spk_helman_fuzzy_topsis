@@ -66,23 +66,23 @@ createHeader("Alternatif");
                 <tbody>
                     <?php
                     include("db.php");
-                    $get_list_kriteria = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a";
-                    $list_kriteria = $conn->query($get_list_kriteria);
+                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a";
+                    $list_alternatif = $conn->query($get_list_alternatif);
 
                     $get_crips = "SELECT nama FROM crips WHERE id_crips = ";
 
-                    foreach ($list_kriteria as $i => $value) {
+                    foreach ($list_alternatif as $i => $value) {
                         $c1 = $conn->query($get_crips . $value["c1"]);
                         $c1 = $c1->fetch_array();
 
-                        $c2 = $conn->query($get_crips . $value["c2"]);
-                        $c2 = $c2->fetch_array();
+                        // $c2 = $conn->query($get_crips . $value["c2"]);
+                        // $c2 = $c2->fetch_array();
 
                         $c3 = $conn->query($get_crips . $value["c3"]);
                         $c3 = $c3->fetch_array();
 
-                        $c4 = $conn->query($get_crips . $value["c4"]);
-                        $c4 = $c4->fetch_array();
+                        // $c4 = $conn->query($get_crips . $value["c4"]);
+                        // $c4 = $c4->fetch_array();
 
                         $c5 = $conn->query($get_crips . $value["c5"]);
                         $c5 = $c5->fetch_array();
@@ -92,9 +92,9 @@ createHeader("Alternatif");
                             <td><?= $value["nama_pemilik"] ?></td>
                             <td><?= $value["alamat"] ?></td>
                             <td><?= $c1["nama"] ?></td>
-                            <td><?= $c2["nama"] ?></td>
+                            <td><?= $value["c2_real"] ?></td>
                             <td><?= $c3["nama"] ?></td>
-                            <td><?= $c4["nama"] ?></td>
+                            <td><?= $value["c4_real"] ?></td>
                             <td><?= $c5["nama"] ?></td>
                             <td>
                                 <!-- TODO: added functionality to edit alternatif -->
