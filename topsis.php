@@ -12,7 +12,8 @@ createHeader("Topsis");
 
     $body = function () {
         include("db.php");
-        $crips_global = [];
+        $global_crips_distribution = [];
+        $global_nilai_terbobot = [];
     ?>
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
@@ -80,9 +81,7 @@ createHeader("Topsis");
                 </thead>
                 <tbody>
                     <?php
-
-
-                    // TODO: get all alternatif from table alternatif and foreeach loop of this
+                    // get all alternatif from table alternatif and foreeach loop of this
                     $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a";
                     $list_alternatif = $conn->query($get_list_alternatif);
 
@@ -124,7 +123,7 @@ createHeader("Topsis");
                     }
 
                     // set all crips to global variable
-                    $crips_global = [
+                    $global_crips_distribution = [
                         "c1" => $c1,
                         "c2" => $c2,
                         "c3" => $c3,
@@ -181,11 +180,11 @@ createHeader("Topsis");
                             <td><?= ($i + 1) ?></td>
                             <td><?= $value["nama_pemilik"] ?></td>
                             <td><?= $value["alamat"] ?></td>
-                            <td><?= ($crips_global["c1"] == 0 ? 0 : $c1["bobot"] / $crips_global["c1"]) ?></td>
-                            <td><?= ($crips_global["c2"] == 0 ? 0 : $value["c2"] / $crips_global["c2"]) ?></td>
-                            <td><?= ($crips_global["c3"] == 0 ? 0 : $c3["bobot"] / $crips_global["c3"]) ?></td>
-                            <td><?= ($crips_global["c4"] == 0 ? 0 : $value["c4"] / $crips_global["c4"]) ?></td>
-                            <td><?= ($crips_global["c5"] == 0 ? 0 : $c5["bobot"] / $crips_global["c5"]) ?></td>
+                            <td><?= ($global_crips_distribution["c1"] == 0 ? 0 : $c1["bobot"] / $global_crips_distribution["c1"]) ?></td>
+                            <td><?= ($global_crips_distribution["c2"] == 0 ? 0 : $value["c2"] / $global_crips_distribution["c2"]) ?></td>
+                            <td><?= ($global_crips_distribution["c3"] == 0 ? 0 : $c3["bobot"] / $global_crips_distribution["c3"]) ?></td>
+                            <td><?= ($global_crips_distribution["c4"] == 0 ? 0 : $value["c4"] / $global_crips_distribution["c4"]) ?></td>
+                            <td><?= ($global_crips_distribution["c5"] == 0 ? 0 : $c5["bobot"] / $global_crips_distribution["c5"]) ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -207,12 +206,66 @@ createHeader("Topsis");
                     <tr>
                         <?php foreach ($list_nilai_terbobot as $v) { ?>
                             <td><?= $v["nilai"] ?></td>
-                        <?php } ?>
+                        <?php }
+
+                        // set global variable of nilai_terbobot
+                        foreach ($list_nilai_terbobot as $v) {
+                            $global_nilai_terbobot[$v["tipe"]] = $v["nilai"];
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>
             <!-- end nilai terbobot -->
 
+            <!-- start bahan perhitungan -->
+            <h3 class="mb-4 text-center text-capitalize">Bahan Perhitungan</h3>
+            <table class="table table-hover shadow">
+                <thead class="text-capitalize">
+                    <th>no</th>
+                    <th>nama pemilik</th>
+                    <th>alamat</th>
+                    <th>jenis tanah</th>
+                    <th>suhu</th>
+                    <th>ketersediaan air</th>
+                    <th>PH tanah</th>
+                    <th>lapisan olahan</th>
+                </thead>
+                <tbody>
+                    <?php
+                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a";
+                    $list_alternatif = $conn->query($get_list_alternatif);
+                    $get_crips = "SELECT bobot FROM crips WHERE id_crips = ";
+
+                    foreach ($list_alternatif as $i => $value) {
+                        $c1 = $conn->query($get_crips . $value["c1"]);
+                        $c1 = $c1->fetch_array();
+
+                        // $c2 = $conn->query($get_crips . $value["c2"]);
+                        // $c2 = $c2->fetch_array();
+
+                        $c3 = $conn->query($get_crips . $value["c3"]);
+                        $c3 = $c3->fetch_array();
+
+                        // $c4 = $conn->query($get_crips . $value["c4"]);
+                        // $c4 = $c4->fetch_array();
+
+                        $c5 = $conn->query($get_crips . $value["c5"]);
+                        $c5 = $c5->fetch_array(); ?>
+                        <tr>
+                            <td><?= ($i + 1) ?></td>
+                            <td><?= $value["nama_pemilik"] ?></td>
+                            <td><?= $value["alamat"] ?></td>
+                            <td><?= ($global_crips_distribution["c1"] == 0 ? 0 : ($global_nilai_terbobot["c1"] * ($c1["bobot"] / $global_crips_distribution["c1"]))) ?></td>
+                            <td><?= ($global_crips_distribution["c2"] == 0 ? 0 : ($global_nilai_terbobot["c2"] * ($value["c2"] / $global_crips_distribution["c2"]))) ?></td>
+                            <td><?= ($global_crips_distribution["c3"] == 0 ? 0 : ($global_nilai_terbobot["c3"] * ($c3["bobot"] / $global_crips_distribution["c3"]))) ?></td>
+                            <td><?= ($global_crips_distribution["c4"] == 0 ? 0 : ($global_nilai_terbobot["c4"] * ($value["c4"] / $global_crips_distribution["c4"]))) ?></td>
+                            <td><?= ($global_crips_distribution["c5"] == 0 ? 0 : ($global_nilai_terbobot["c5"] * ($c5["bobot"] / $global_crips_distribution["c5"]))) ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <!-- end bahan perhitungan -->
         <?php };
 
     createSidebar($body); ?>
