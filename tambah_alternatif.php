@@ -41,14 +41,14 @@ createHeader("Tambah Alternatif");
                             <div class="mb-3 row">
                                 <label for="jenis_tanah" class="col-sm-2 col-form-label text-capitalize">jenis tanah</label>
                                 <div class="col-sm-10">
-                                    <select name="jenis_tanah" id="jenis_tanah" required>
-                                        <option selected value="">Pilih Jenis Tanah</option>
+                                    <select name="jenis_tanah" id="jenis_tanah" class="form-control text-capitalize" required>
+                                        <option selected value="" class="form-control text-capitalize">Pilih Jenis Tanah</option>
                                         <?php
                                         include "db.php";
                                         $list_jenis_tanah = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c1'");
                                         $conn->close();
                                         foreach ($list_jenis_tanah as $i => $v) { ?>
-                                            <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                            <option value="<?= $v['id_crips'] ?>" class="form-control text-capitalize"><?= $v["nama"] ?></option>
                                         <?php }
                                         ?>
                                     </select>
@@ -59,7 +59,17 @@ createHeader("Tambah Alternatif");
                             <div class="mb-3 row">
                                 <label for="suhu" class="col-sm-2 col-form-label text-capitalize">suhu ℃</label>
                                 <div class="col-sm-10">
-                                    <input name="suhu" type="number" class="form-control" id="suhu" required> </input>
+                                    <select name="suhu" id="suhu" required class="form-control text-capitalize">
+                                        <option selected value="">Pilih suhu</option>
+                                        <?php
+                                        include "db.php";
+                                        $list_suhu = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c2'");
+                                        $conn->close();
+                                        foreach ($list_suhu as $i => $v) { ?>
+                                            <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
 
@@ -68,7 +78,7 @@ createHeader("Tambah Alternatif");
                             <div class="mb-3 row">
                                 <label for="ketersediaan_air" class="col-sm-2 col-form-label text-capitalize">ketersediaan air</label>
                                 <div class="col-sm-10">
-                                    <select name="ketersediaan_air" id="ketersediaan_air" required>
+                                    <select name="ketersediaan_air" id="ketersediaan_air" required class="form-control text-capitalize">
                                         <option selected value="">Pilih ketersediaan Air</option>
                                         <?php
                                         include "db.php";
@@ -86,7 +96,19 @@ createHeader("Tambah Alternatif");
                             <div class="mb-3 row">
                                 <label for="ph_tanah" class="col-sm-2 col-form-label text-capitalize">PH Tanah</label>
                                 <div class="col-sm-10">
-                                    <input name="ph_tanah" type="text" class="form-control" id="ph_tanah" required> </input>
+                                    <select name="ph_tanah" id="ph_tanah" class="form-control" required>
+                                        <option selected value="" class="form-control text-capitalize">Pilih suhu</option>
+                                        <div class="dropdown-menu">
+                                            <?php
+                                            include "db.php";
+                                            $list_ph_tanah = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c4'");
+                                            $conn->close();
+                                            foreach ($list_ph_tanah as $i => $v) { ?>
+                                                <option value="<?= $v['id_crips'] ?>" class="form-control text-capitalize"><?= $v["nama"] ?></option>
+                                            <?php }
+                                            ?>
+                                        </div>
+                                    </select>
                                 </div>
                             </div>
 
@@ -94,7 +116,7 @@ createHeader("Tambah Alternatif");
                             <div class="mb-3 row">
                                 <label for="lapisan_olahan" class="col-sm-2 col-form-label text-capitalize">lapisan olahan</label>
                                 <div class="col-sm-10">
-                                    <select name="lapisan_olahan" id="lapisan_olahan" required>
+                                    <select name="lapisan_olahan" id="lapisan_olahan" required class="form-control text-capitalize">
                                         <option selected value="">Lapisan Olahan</option>
                                         <?php
                                         include "db.php";
