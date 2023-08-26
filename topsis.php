@@ -86,7 +86,7 @@ createHeader("Topsis");
                 <tbody>
                     <?php
                     // get all alternatif from table alternatif and foreeach loop of this
-                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a";
+                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a";
                     $list_alternatif = $conn->query($get_list_alternatif);
 
                     $get_crips = "SELECT bobot FROM crips WHERE id_crips = ";
@@ -104,7 +104,8 @@ createHeader("Topsis");
                     // C2
                     $c2 = 0.0;
                     foreach ($list_alternatif as $i => $v) {
-                        $c2 += pow(floatval($v["c2"]), 2);
+                        $c2_temp = $conn->query($get_crips . $v["c2"])->fetch_assoc();
+                        $c2 += pow(floatval($c2_temp["bobot"]), 2);
                     }
                     $c2 = sqrt($c2);
 
@@ -120,7 +121,8 @@ createHeader("Topsis");
                     // C4
                     $c4 = 0.0;
                     foreach ($list_alternatif as $i => $v) {
-                        $c4 += pow(floatval($v["c4"]), 2);
+                        $c4_temp = $conn->query($get_crips . $v["c4"])->fetch_assoc();
+                        $c4 += pow(floatval($c4_temp["bobot"]), 2);
                     }
                     $c4 = sqrt($c4);
 
