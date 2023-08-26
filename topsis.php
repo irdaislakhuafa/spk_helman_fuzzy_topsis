@@ -169,7 +169,7 @@ createHeader("Topsis");
                 </thead>
                 <tbody>
                     <?php
-                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a";
+                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a";
                     $list_alternatif = $conn->query($get_list_alternatif);
                     $get_crips = "SELECT bobot FROM crips WHERE id_crips = ";
 
@@ -177,14 +177,14 @@ createHeader("Topsis");
                         $c1 = $conn->query($get_crips . $value["c1"]);
                         $c1 = $c1->fetch_array();
 
-                        // $c2 = $conn->query($get_crips . $value["c2"]);
-                        // $c2 = $c2->fetch_array();
+                        $c2 = $conn->query($get_crips . $value["c2"]);
+                        $c2 = $c2->fetch_array();
 
                         $c3 = $conn->query($get_crips . $value["c3"]);
                         $c3 = $c3->fetch_array();
 
-                        // $c4 = $conn->query($get_crips . $value["c4"]);
-                        // $c4 = $c4->fetch_array();
+                        $c4 = $conn->query($get_crips . $value["c4"]);
+                        $c4 = $c4->fetch_array();
 
                         $c5 = $conn->query($get_crips . $value["c5"]);
                         $c5 = $c5->fetch_array(); ?>
@@ -193,9 +193,9 @@ createHeader("Topsis");
                             <td><?= $value["nama_pemilik"] ?></td>
                             <td><?= $value["alamat"] ?></td>
                             <td><?= ($global_crips_distribution["c1"] == 0 ? 0 : $c1["bobot"] / $global_crips_distribution["c1"]) ?></td>
-                            <td><?= ($global_crips_distribution["c2"] == 0 ? 0 : $value["c2"] / $global_crips_distribution["c2"]) ?></td>
+                            <td><?= ($global_crips_distribution["c2"] == 0 ? 0 : $c2["bobot"] / $global_crips_distribution["c2"]) ?></td>
                             <td><?= ($global_crips_distribution["c3"] == 0 ? 0 : $c3["bobot"] / $global_crips_distribution["c3"]) ?></td>
-                            <td><?= ($global_crips_distribution["c4"] == 0 ? 0 : $value["c4"] / $global_crips_distribution["c4"]) ?></td>
+                            <td><?= ($global_crips_distribution["c4"] == 0 ? 0 : $c4["bobot"] / $global_crips_distribution["c4"]) ?></td>
                             <td><?= ($global_crips_distribution["c5"] == 0 ? 0 : $c5["bobot"] / $global_crips_distribution["c5"]) ?></td>
                         </tr>
                     <?php } ?>
@@ -245,7 +245,7 @@ createHeader("Topsis");
                 </thead>
                 <tbody>
                     <?php
-                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a";
+                    $get_list_alternatif = "SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a";
                     $list_alternatif = $conn->query($get_list_alternatif);
                     $get_crips = "SELECT bobot FROM crips WHERE id_crips = ";
 
@@ -253,23 +253,23 @@ createHeader("Topsis");
                         $c1 = $conn->query($get_crips . $value["c1"]);
                         $c1 = $c1->fetch_array();
 
-                        // $c2 = $conn->query($get_crips . $value["c2"]);
-                        // $c2 = $c2->fetch_array();
+                        $c2 = $conn->query($get_crips . $value["c2"]);
+                        $c2 = $c2->fetch_array();
 
                         $c3 = $conn->query($get_crips . $value["c3"]);
                         $c3 = $c3->fetch_array();
 
-                        // $c4 = $conn->query($get_crips . $value["c4"]);
-                        // $c4 = $c4->fetch_array();
+                        $c4 = $conn->query($get_crips . $value["c4"]);
+                        $c4 = $c4->fetch_array();
 
                         $c5 = $conn->query($get_crips . $value["c5"]);
                         $c5 = $c5->fetch_array();
 
                         $parameter = [
                             "c1" => ($global_crips_distribution["c1"] == 0 ? 0 : ($global_nilai_terbobot["c1"] * ($c1["bobot"] / $global_crips_distribution["c1"]))),
-                            "c2" => ($global_crips_distribution["c2"] == 0 ? 0 : ($global_nilai_terbobot["c2"] * ($value["c2"] / $global_crips_distribution["c2"]))),
+                            "c2" => ($global_crips_distribution["c2"] == 0 ? 0 : ($global_nilai_terbobot["c2"] * ($c2["bobot"] / $global_crips_distribution["c2"]))),
                             "c3" => ($global_crips_distribution["c3"] == 0 ? 0 : ($global_nilai_terbobot["c3"] * ($c3["bobot"] / $global_crips_distribution["c3"]))),
-                            "c4" => ($global_crips_distribution["c4"] == 0 ? 0 : ($global_nilai_terbobot["c4"] * ($value["c4"] / $global_crips_distribution["c4"]))),
+                            "c4" => ($global_crips_distribution["c4"] == 0 ? 0 : ($global_nilai_terbobot["c4"] * ($c4["bobot"] / $global_crips_distribution["c4"]))),
                             "c5" => ($global_crips_distribution["c5"] == 0 ? 0 : ($global_nilai_terbobot["c5"] * ($c5["bobot"] / $global_crips_distribution["c5"]))),
                         ];
 
@@ -438,7 +438,7 @@ createHeader("Topsis");
                         <th>d-</th>
                     </tr>
                     <?php
-                    $solution_D_min_max = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c2_real, a.c3, a.c4, a.c4_real, a.c5 FROM alternatif a");
+                    $solution_D_min_max = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a");
 
                     $result = [];
                     foreach ($solution_D_min_max as $i => $s) {
