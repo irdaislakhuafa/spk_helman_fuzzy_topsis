@@ -50,7 +50,7 @@ function createSidebar($body = null)
             </div>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#"><span class="fa fa-home mr-3"></span> Beranda</a>
+                    <a href="./home.php"><span class="fa fa-home mr-3"></span> Beranda</a>
                 </li>
                 <li>
                     <a href="alternatif.php" class="text-capitalize"><span class="fa fa-sticky-note mr-3"></span> alternatif</a>
