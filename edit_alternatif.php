@@ -68,54 +68,104 @@ createHeader("Edit Alternatif");
                             <div class="mb-3 row">
                                 <label for="jenis_tanah" class="col-sm-2 col-form-label text-capitalize">jenis tanah</label>
                                 <div class="col-sm-10">
-                                    <select name="jenis_tanah" id="jenis_tanah" required>
-                                        <option selected value="">Pilih Jenis Tanah</option>
+                                    <select name="jenis_tanah" id="jenis_tanah" class="text-capitalize form-control" required>
+                                        <option value="">Pilih Jenis Tanah</option>
                                         <?php
                                         include "db.php";
                                         $list_jenis_tanah = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c1'");
                                         $conn->close();
-                                        foreach ($list_jenis_tanah as $i => $v) { ?>
-                                            <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                        foreach ($list_jenis_tanah as $i => $v) {
+                                            if ($v['id_crips'] == $alternatif["c1"]) { ?>
+                                                <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                            <? } ?>
                                         <?php }
                                         ?>
                                     </select>
                                 </div>
                             </div>
 
-                            <!-- TODO: added input suhu -->
+                            <!-- Suhu -->
+                            <div class="mb-3 row">
+                                <label for="suhu" class="col-sm-2 col-form-label text-capitalize">Suhu</label>
+                                <div class="col-sm-10">
+                                    <select name="suhu" id="suhu" required class="text-capitalize form-control">
+                                        <option selected value="">Pilih Suhu</option>
+                                        <?php
+                                        include "db.php";
+                                        $list_suhu = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c2'");
+                                        $conn->close();
+                                        foreach ($list_suhu as $i => $v) {
+                                            if ($v['id_crips'] == $alternatif["c2"]) { ?>
+                                                <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                            <? } ?>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
 
                             <!-- ketersediaan air -->
                             <div class="mb-3 row">
                                 <label for="ketersediaan_air" class="col-sm-2 col-form-label text-capitalize">ketersediaan air</label>
                                 <div class="col-sm-10">
-                                    <select name="ketersediaan_air" id="ketersediaan_air" required>
-                                        <option selected value="">Pilih ketersediaan Air</option>
+                                    <select name="ketersediaan_air" id="ketersediaan_air" class="text-capitalize form-control" required>
+                                        <option value="">Pilih ketersediaan Air</option>
                                         <?php
                                         include "db.php";
                                         $list_ketersediaan_air = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c3'");
                                         $conn->close();
-                                        foreach ($list_ketersediaan_air as $i => $v) { ?>
-                                            <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                        foreach ($list_ketersediaan_air as $i => $v) {
+                                            if ($v['id_crips'] == $alternatif["c3"]) { ?>
+                                                <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                            <? } ?>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- PH tanah -->
+                            <div class="mb-3 row">
+                                <label for="ph_tanah" class="col-sm-2 col-form-label text-capitalize">PH tanah</label>
+                                <div class="col-sm-10">
+                                    <select name="ph_tanah" id="ph_tanah" required class="text-capitalize form-control">
+                                        <option selected value="">pilih PH tanah</option>
+                                        <?php
+                                        include "db.php";
+                                        $list_ph_tanah = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c4'");
+                                        $conn->close();
+                                        foreach ($list_ph_tanah as $i => $v) {
+                                            if ($v['id_crips'] == $alternatif["c4"]) { ?>
+                                                <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                            <? } ?>
                                         <?php }
                                         ?>
                                     </select>
                                 </div>
                             </div>
 
-                            <!-- TODO: added input PH tanah -->
-
                             <!-- lapisan olahan -->
                             <div class="mb-3 row">
                                 <label for="lapisan_olahan" class="col-sm-2 col-form-label text-capitalize">lapisan olahan</label>
                                 <div class="col-sm-10">
-                                    <select name="lapisan_olahan" id="lapisan_olahan" required>
-                                        <option selected value="">Lapisan Olahan</option>
+                                    <select name="lapisan_olahan" id="lapisan_olahan" required class="text-capitalize form-control">
+                                        <option selected value="">Pilih Lapisan Olahan</option>
                                         <?php
                                         include "db.php";
                                         $list_lapisan_olahan = $conn->query("SELECT id_crips, nama FROM crips, kriteria WHERE crips.id_kriteria = kriteria.id_kriteria AND kriteria.tipe = 'c5'");
                                         $conn->close();
-                                        foreach ($list_lapisan_olahan as $i => $v) { ?>
-                                            <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                        foreach ($list_lapisan_olahan as $i => $v) {
+                                            if ($v['id_crips'] == $alternatif["c5"]) { ?>
+                                                <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
+                                            <? } ?>
                                         <?php }
                                         ?>
                                     </select>

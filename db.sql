@@ -11,11 +11,11 @@ CREATE TABLE `alternatif` (
     alamat text,
     prefrensi double,
     c1 int, -- id_crips 
-    c2 double, 
-    c2_real int, 
+    c2 int, 
+    -- c2_real int, 
     c3 int, -- id_crips 
-    c4 double, 
-    c4_real double, 
+    c4 int, 
+    -- c4_real double, 
     c5 int  -- id_crips
 );
 
@@ -77,9 +77,9 @@ INSERT INTO `crips` (nama, bobot, id_kriteria) VALUES
     ("padas", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c1")),
     
     -- C2: suhu
-    -- ("sejuk", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c2")), -- 12 - 25 C
-    -- ("hangat", 0.5, (SELECT id_kriteria FROM kriteria WHERE tipe = "c2")), -- 26 - 31 C
-    -- ("panas", 1.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c2")), -- 32 > unlimited C
+    ("sejuk", 1.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c2")), -- 12 - 25 C
+    ("hangat", 0.5, (SELECT id_kriteria FROM kriteria WHERE tipe = "c2")), -- 26 - 31 C
+    ("panas", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c2")), -- 32 > unlimited C
 
     -- C3: ketersediaan air
     ("sulit", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c3")),
@@ -87,9 +87,9 @@ INSERT INTO `crips` (nama, bobot, id_kriteria) VALUES
     ("mudah", 1.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c3")),
 
     -- C4: PH tanah
-    -- ("asam", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c4")),
-    -- ("sedang", 0.5, (SELECT id_kriteria FROM kriteria WHERE tipe = "c4")),
-    -- ("basah", 1.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c4")),
+    ("asam", 0.5, (SELECT id_kriteria FROM kriteria WHERE tipe = "c4")),
+    ("sedang", 1.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c4")),
+    ("basah", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c4")),
 
     -- C5: lapisan olahan
     ("dangkal", 0.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c5")),
@@ -97,15 +97,15 @@ INSERT INTO `crips` (nama, bobot, id_kriteria) VALUES
     ("dalam", 1.0, (SELECT id_kriteria FROM kriteria WHERE tipe = "c5"));
 
 INSERT INTO `alternatif` (
-    nama_pemilik, alamat, c1, c2, c2_real, c3, c4, c4_real, c5
+    nama_pemilik, alamat, c1, c2, c3, c4, c5
 ) VALUES (
     "prio", 
     "desa jetak", 
     (SELECT crips.id_crips FROM crips, kriteria WHERE crips.nama = "laterit" AND kriteria.tipe = "c1" AND crips.id_kriteria = kriteria.id_kriteria),
-    0.85, -- dynamic
-    15,
+    (SELECT crips.id_crips FROM crips, kriteria WHERE crips.nama = "hangat" AND kriteria.tipe = "c2" AND crips.id_kriteria = kriteria.id_kriteria), -- 0.85, -- dynamic
+    -- 15,
     (SELECT crips.id_crips FROM crips, kriteria WHERE crips.nama = "sulit" AND kriteria.tipe = "c3" AND crips.id_kriteria = kriteria.id_kriteria),
-    0.6, -- dynamic
-    5.6,
+    -- 0.6, -- dynamic
+    (SELECT crips.id_crips FROM crips, kriteria WHERE crips.nama = "sedang" AND kriteria.tipe = "c4" AND crips.id_kriteria = kriteria.id_kriteria), -- 5.6,
     (SELECT crips.id_crips FROM crips, kriteria WHERE crips.nama = "dalam" AND kriteria.tipe = "c5" AND crips.id_kriteria = kriteria.id_kriteria)
 );
