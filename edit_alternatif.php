@@ -32,8 +32,7 @@ createHeader("Edit Alternatif");
     $body = function () {
         include "db.php";
         $id = $_GET["id"];
-        $alternatif = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a WHERE a.id_alternatif = '$id'")->fetch_assoc();
-    ?>
+        $alternatif = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a WHERE a.id_alternatif = '$id'")->fetch_assoc();?>
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             <!-- <h2 class="mb-4">Tambah Alternatif</h2> -->
@@ -79,9 +78,8 @@ createHeader("Edit Alternatif");
                                                 <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
                                             <?php } else { ?>
                                                 <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
-                                            <? } ?>
-                                        <?php }
-                                        ?>
+                                            <?php } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -101,7 +99,7 @@ createHeader("Edit Alternatif");
                                                 <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
                                             <?php } else { ?>
                                                 <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -122,7 +120,7 @@ createHeader("Edit Alternatif");
                                                 <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
                                             <?php } else { ?>
                                                 <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -143,9 +141,8 @@ createHeader("Edit Alternatif");
                                                 <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
                                             <?php } else { ?>
                                                 <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
-                                            <? } ?>
-                                        <?php }
-                                        ?>
+                                            <?php } ?>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -165,7 +162,7 @@ createHeader("Edit Alternatif");
                                                 <option value="<?= $v['id_crips'] ?>" selected><?= $v["nama"] ?></option>
                                             <?php } else { ?>
                                                 <option value="<?= $v['id_crips'] ?>"><?= $v["nama"] ?></option>
-                                            <? } ?>
+                                            <?php } ?>
                                         <?php }
                                         ?>
                                     </select>
@@ -183,8 +180,8 @@ createHeader("Edit Alternatif");
                 </div>
             </div>
             <!-- end card -->
-        <?php };
-
+        <?php 
+        };
     createSidebar($body); ?>
 </body>
 

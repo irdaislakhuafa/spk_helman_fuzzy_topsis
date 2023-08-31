@@ -449,7 +449,7 @@ createHeader("Topsis");
                         }
                         $temp_d["d+"] = sqrt($temp_d["d+"]);
 
-                        // set D+
+                        // set D-
                         $temp_d["d-"] = 0.0;
                         foreach ($global_negatif_solution_A_min as $c => $v) {
                             $temp_d["d-"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
@@ -496,7 +496,7 @@ createHeader("Topsis");
                         $result = [
                             "nama_pemilik" => $v["nama_pemilik"],
                             "alamat" => $v["alamat"],
-                            "prefrensi" => floatval($v["d-"] / ($v["d-"] + $v["d+"]))
+                            "prefrensi" => floatval($v["d-"] / ($v["d+"] + $v["d-"]))
                         ];
                         array_push($results, $result);
 

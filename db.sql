@@ -55,11 +55,11 @@ CREATE TABLE `nilai_terbobot` (
 -- sample data
 -- TODO: added page to add and edit nilai_terbobot
 INSERT INTO `nilai_terbobot` (tipe, nilai) VALUES
-    ("c1", 1.0),
-    ("c2", 0.2),
-    ("c3", 1.0),
-    ("c4", 0.7),
-    ("c5", 1.0);
+    ("c1", 0.2),
+    ("c2", 0.25),
+    ("c3", 0.25),
+    ("c4", 0.2),
+    ("c5", 0.1);
 
 -- kriteria 
 INSERT INTO `kriteria` (nama_kriteria, tipe) VALUES

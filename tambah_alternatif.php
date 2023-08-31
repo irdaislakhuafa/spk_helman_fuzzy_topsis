@@ -97,7 +97,7 @@ createHeader("Tambah Alternatif");
                                 <label for="ph_tanah" class="col-sm-2 col-form-label text-capitalize">PH Tanah</label>
                                 <div class="col-sm-10">
                                     <select name="ph_tanah" id="ph_tanah" class="form-control" required>
-                                        <option selected value="" class="form-control text-capitalize">Pilih suhu</option>
+                                        <option selected value="" class="form-control text-capitalize">Pilih pH Tanah</option>
                                         <div class="dropdown-menu">
                                             <?php
                                             include "db.php";
