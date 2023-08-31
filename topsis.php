@@ -274,7 +274,6 @@ createHeader("Topsis");
                         ];
 
                         array_push($global_calculation_parameters, $parameter);
-
                     ?>
                         <tr>
                             <td><?= ($i + 1) ?></td>
@@ -341,6 +340,11 @@ createHeader("Topsis");
 
                     $result_max_min = [];
                     foreach ($benefit_cost as $c => $v) {
+                        // except c3
+                        if ($c == "c3") {
+                            $v = "cost";
+                        }
+
                         if ($v == "benefit") {
                             $max = 0.0;
                             foreach ($global_calculation_parameters as $gcp) {
@@ -394,6 +398,11 @@ createHeader("Topsis");
 
                     $result_max_min = [];
                     foreach ($benefit_cost as $c => $v) {
+                        // except c3
+                        if ($c == "c3") {
+                            $v = "cost";
+                        }
+
                         if ($v == "benefit") {
                             $min = PHP_FLOAT_MAX;
                             foreach ($global_calculation_parameters as $gcp) {
@@ -438,21 +447,21 @@ createHeader("Topsis");
                         <th>d-</th>
                     </tr>
                     <?php
-                    $solution_D_min_max = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a");
+                    $solution_D_min_max = $conn->query("SELECT a.id_alternatif, a.nama_pemilik, a.alamat, a.c1, a.c2, a.c3, a.c4, a.c5 FROM alternatif a");
 
                     $result = [];
                     foreach ($solution_D_min_max as $i => $s) {
                         // set D+
                         $temp_d["d+"] = 0.0;
                         foreach ($global_negatif_solution_A_max as $c => $v) {
-                            $temp_d["d+"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
+                            $temp_d["d+"] += pow((floatval($v) - $global_calculation_parameters[$i][$c]), 2);
                         }
                         $temp_d["d+"] = sqrt($temp_d["d+"]);
 
                         // set D-
                         $temp_d["d-"] = 0.0;
                         foreach ($global_negatif_solution_A_min as $c => $v) {
-                            $temp_d["d-"] += pow((floatval($v) - $global_calculation_parameters[$i]["c1"]), 2);
+                            $temp_d["d-"] += pow((floatval($v) - $global_calculation_parameters[$i][$c]), 2);
                         }
                         $temp_d["d-"] = sqrt($temp_d["d-"]);
 
@@ -486,6 +495,7 @@ createHeader("Topsis");
             <table class="table table-hover shadow">
                 <thead class="text-capitalize">
                     <tr>
+                        <th>rangking</th>
                         <th>nama pemilik</th>
                         <th>alamat</th>
                         <th>prefrensi</th>
@@ -516,6 +526,7 @@ createHeader("Topsis");
                     // var_dump($solution_D_min_max);
                     foreach ($results as $i => $v) { ?>
                         <tr>
+                            <td><?= $i + 1 ?></td>
                             <td><?= $v["nama_pemilik"] ?></td>
                             <td><?= $v["alamat"] ?></td>
                             <td><?= $v["prefrensi"] ?></td>
